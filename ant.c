@@ -30,12 +30,17 @@ void peek(void) {
     michael.cached[1] = stack[top-1][1];
 }
 
-void move(char dir) {
-    
+void move(int dir) {
+    // Move Michael according to michael.itch[dir]
+    for (int i = 0; i < 4; i++) {
+        michael.itch[i] = 0;
+    }
 }
 
-int is_open(char dir) {
-    return 0;
+void is_open(int dir) {  // 0L 1R 2F 3B
+    int free_spaces = 0;
+    // Checks for number of free spaces in given direction, with a for loop or while loop
+    michael.itch[dir] = free_spaces;
 }
 
 void clear(void) {
