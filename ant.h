@@ -1,6 +1,6 @@
 #define EACH_SIDE 16
 #define MAX_STEPS 20
-#define QUEUE_SIZE 100
+#define STACK_SIZE 100
 
 typedef struct Ant {
     int current[2];  // Michael's current coordinates

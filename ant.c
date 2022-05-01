@@ -2,7 +2,7 @@
 #include "ant.h"
 
 static int top = 0;
-static int queue[QUEUE_SIZE][2];
+static int stack[STACK_SIZE][2];
 
 static int wall_map[EACH_SIDE][EACH_SIDE];
 static int deed_map[EACH_SIDE][EACH_SIDE];
@@ -20,14 +20,14 @@ void pop(void) {
 }
 
 void push(int x, int y) {
-    queue[top][0] = x;
-    queue[top][1] = y;
+    stack[top][0] = x;
+    stack[top][1] = y;
     top++;
 }
 
 void peek(void) {
-    michael.cached[0] = queue[top-1][0];
-    michael.cached[1] = queue[top-1][1];
+    michael.cached[0] = stack[top-1][0];
+    michael.cached[1] = stack[top-1][1];
 }
 
 void move(char dir) {
