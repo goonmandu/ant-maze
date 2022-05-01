@@ -12,7 +12,7 @@ Ant michael = {
     .current = {0, 0},
     .cached = {0, 0},
     .itch = 0,
-    .score = 1
+    .score = 0
 };
 
 void pop(void) {
