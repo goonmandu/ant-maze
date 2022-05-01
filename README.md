@@ -15,4 +15,13 @@ gcc -o main main.c ant.c
 finally,
 ```zsh
 ./main             # Linux or macOS
-./main.exe         # Windows
+./main.exe         # Windows (PowerShell)
+main.exe           # Windows (Command Prompt)
+```
+
+# alternate compile instructions
+```zsh
+sh make.sh         # Linux or macOS
+./make.bat         # Windows (PowerShell)
+make.bat           # Windows (Command Prompt)
+```
