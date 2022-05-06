@@ -91,7 +91,7 @@ void scan_maze(FILE *file) {
         if (fscanf(file, "%d", &curr) == EOF) {
             break;
         }
-        printf("%d ", curr);
+        // printf("%d ", curr);
         if (curr == -1) {
             printf("wall\n");
             pher_map[row][col] = 0;
@@ -112,7 +112,7 @@ void scan_maze(FILE *file) {
         if (col > 15) {
             row++;
             col = 0;
-            printf("\n\n");
+            // printf("\n\n");
         }
     }
 }
