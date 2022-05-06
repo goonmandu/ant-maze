@@ -84,7 +84,40 @@ int has_pher(int x, int y) {
     return 0;
 }
 
+void scan_maze(FILE *file) {
+    int row = 0, col = 0;
+    while (1) {
+        int curr;
+        if (fscanf(file, "%d", &curr) == EOF) {
+            break;
+        }
+        printf("%d ", curr);
+        if (curr == -1) {
+            printf("wall\n");
+            pher_map[row][col] = 0;
+            deed_map[row][col] = 0;
+            wall_map[row][col] = 1;
+        } else if (curr == 0) {
+            printf("empty\n");
+            pher_map[row][col] = 0;
+            deed_map[row][col] = 0;
+            wall_map[row][col] = 0;
+        } else if (curr > 0) {
+            printf("deed\n");
+            pher_map[row][col] = 0;
+            deed_map[row][col] = curr;
+            wall_map[row][col] = 0;
+        }
+        col++;
+        if (col > 15) {
+            row++;
+            col = 0;
+            printf("\n\n");
+        }
+    }
+}
+
 Cell check(int x, int y) {
-    Cell cell = {wall_map[x][y], deed_map[x][y], pher_map[x][y]};
+    Cell cell = (Cell) {wall_map[y][x], deed_map[y][x], pher_map[y][x]};
     return cell;
 }

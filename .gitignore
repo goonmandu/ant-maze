@@ -1,4 +1,4 @@
-main.o
-ant.o
+*.o
 main
-main.exe
+*.exe
+map

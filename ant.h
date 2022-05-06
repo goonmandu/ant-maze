@@ -31,4 +31,5 @@ void repeat(void (*funcptr) (void), int times);
 int has_wall(int x, int y);
 int has_deed(int x, int y);
 int has_pher(int x, int y);
+void scan_maze(FILE *file);
 Cell check(int x, int y);  // check(4, 6).has_deed
