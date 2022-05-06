@@ -93,17 +93,17 @@ void scan_maze(FILE *file) {
         }
         // printf("%d ", curr);
         if (curr == -1) {
-            printf("wall\n");
+            // printf("wall\n");
             pher_map[row][col] = 0;
             deed_map[row][col] = 0;
             wall_map[row][col] = 1;
         } else if (curr == 0) {
-            printf("empty\n");
+            // printf("empty\n");
             pher_map[row][col] = 0;
             deed_map[row][col] = 0;
             wall_map[row][col] = 0;
         } else if (curr > 0) {
-            printf("deed\n");
+            // printf("deed\n");
             pher_map[row][col] = 0;
             deed_map[row][col] = curr;
             wall_map[row][col] = 0;
