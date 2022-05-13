@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "ant.h"
 
 static int top = 0;
@@ -9,7 +10,7 @@ static int deed_map[EACH_SIDE][EACH_SIDE];
 static int pher_map[EACH_SIDE][EACH_SIDE];
 
 Ant michael = {
-    .current = {0, 0},
+    .current = {0, 0},  // will not be read whatsoever, only for traversal purposes
     .cached = {0, 0},
     .itch = 0,
     .score = 0
@@ -30,8 +31,54 @@ void peek(void) {
     michael.cached[1] = stack[top-1][1];
 }
 
-void move(int dir) {
-    // Move Michael according to michael.itch[dir]
+void move(int dir, int spaces) {  // General purpose move function
+    switch (dir) {
+        case 0:  // Left
+            for (int i = 0; i < spaces; i++) {
+                michael.current[0]++;
+                print_positions(' ');
+                printf("%d\n", check(michael.current[0], michael.current[1]).has_wall);
+                if (michael.current[0] < 0 || check(michael.current[0], michael.current[1]).has_wall) {
+                    michael.current[0]--;
+                }
+            }
+            break;
+        case 1:  // Right
+            for (int i = 0; i < spaces; i++) {
+                michael.current[0]--;
+                print_positions(' ');
+                printf("%d\n", check(michael.current[0], michael.current[1]).has_wall);
+                if (michael.current[0] > 15 || check(michael.current[0], michael.current[1]).has_wall) {
+                    michael.current[0]++;
+                }
+            }
+            break;
+        case 2:  // Up
+            for (int i = 0; i < spaces; i++) {
+                michael.current[1]--;
+                print_positions(' ');
+                printf("%d\n", check(michael.current[0], michael.current[1]).has_wall);
+                if (michael.current[1] < 0 || check(michael.current[0], michael.current[1]).has_wall) {
+                    michael.current[1]++;
+                }
+            }
+            break;
+        case 3:  // Down
+            for (int i = 0; i < spaces; i++) {
+                michael.current[1]++;
+                print_positions(' ');
+                printf("%d\n", check(michael.current[0], michael.current[1]).has_wall);
+                if (michael.current[1] > 15 || check(michael.current[0], michael.current[1]).has_wall) {
+                    michael.current[1]--;
+                }
+            }
+            break;
+        default:
+            printf("Incorrect parameters for function: move(%d, %d) was called\n", dir, spaces);
+            exit(1);
+    }
+
+    /* Clear itches */
     for (int i = 0; i < 4; i++) {
         michael.itch[i] = 0;
     }
@@ -48,7 +95,7 @@ void clear(void) {
 }
 
 void bold_jump(void) {
-
+    
 }
 
 void cautious_jump(void) {
@@ -59,9 +106,11 @@ void backtrack(void) {
 
 }
 
+/*  CANCELLED
 void repeat(void (*funcptr) (void), int times) {
 
 }
+*/
 
 /*
 int *decode_xy(int num, int dim) {
@@ -72,6 +121,7 @@ int *decode_xy(int num, int dim) {
 }
 */
 
+/*
 int has_wall(int x, int y) {
     return 0;
 }
@@ -83,6 +133,7 @@ int has_deed(int x, int y) {
 int has_pher(int x, int y) {
     return 0;
 }
+*/
 
 void scan_maze(FILE *file) {
     int row = 0, col = 0;
@@ -118,6 +169,16 @@ void scan_maze(FILE *file) {
 }
 
 Cell check(int x, int y) {
+    // Cell cell = (Cell) {wall_map[x][y], deed_map[x][y], pher_map[x][y]};
     Cell cell = (Cell) {wall_map[y][x], deed_map[y][x], pher_map[y][x]};
     return cell;
+}
+
+void set_positions(int x, int y) {
+    michael.current[0] = x;
+    michael.current[1] = y;
+}
+
+void print_positions(char end) {
+    printf("(%d, %d)%c", michael.current[0], michael.current[1], end);
 }
