@@ -78,10 +78,7 @@ void move(int dir, int spaces) {  // General purpose move function
             exit(1);
     }
 
-    /* Clear itches */
-    for (int i = 0; i < 4; i++) {
-        michael.itch[i] = 0;
-    }
+    feel_itch();
 }
 
 void is_open(int dir) {  // 0L 1R 2F 3B
@@ -169,7 +166,6 @@ void scan_maze(FILE *file) {
 }
 
 Cell check(int x, int y) {
-    // Cell cell = (Cell) {wall_map[x][y], deed_map[x][y], pher_map[x][y]};
     Cell cell = (Cell) {wall_map[y][x], deed_map[y][x], pher_map[y][x]};
     return cell;
 }
@@ -181,4 +177,55 @@ void set_positions(int x, int y) {
 
 void print_positions(char end) {
     printf("(%d, %d)%c", michael.current[0], michael.current[1], end);
+}
+
+void feel_itch() {
+    for (int dir = 0; dir < 4; dir++) {
+        int offset = 0;
+        int x, y;
+        int spaces = 0;
+        while (1) {
+            offset++;
+            if (dir == 0) {  // Scan left
+                x = michael.current[0] - offset;
+                y = michael.current[1];
+            } else if (dir == 1) {  // Scan right
+                x = michael.current[0] + offset;
+                y = michael.current[1];
+            } else if (dir == 2) {  // Scan up
+                x = michael.current[0];
+                y = michael.current[1] - offset;
+            } else if (dir == 3) {  // Scan down
+                x = michael.current[0];
+                y = michael.current[1] + offset;
+            }
+
+            if (check(x, y).has_pher) {
+                spaces = 0;
+                break;
+            }
+
+            if (check(x, y).has_wall) {
+                break;
+            }
+
+            spaces++;     
+        }
+        michael.itch[dir] = spaces;
+    }
+}
+
+void print_itches(char end) {
+    printf("{");
+    for (int i = 0; i < 4; i++) {
+        if (i != 3) {
+            printf("%d, ", michael.itch[i]);
+        } else {
+            printf("%d}%c", michael.itch[i], end);
+        }
+    }
+}
+
+void put_pheromone(int x, int y) {
+    pher_map[y][x] = 1;
 }

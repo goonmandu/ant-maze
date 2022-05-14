@@ -36,3 +36,6 @@ void scan_maze(FILE *file);
 Cell check(int x, int y);  // check(4, 6).has_deed
 void set_positions(int x, int y);
 void print_positions(char);
+void feel_itch(void);
+void print_itches(char);
+void put_pheromone(int, int);

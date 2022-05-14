@@ -18,9 +18,10 @@ int main() {
     printf("Coords remembered by peek: (%d, %d)\n", michael.cached[0], michael.cached[1]);
     printf("%d\n", check(2, 3).has_deed);
     */
-    set_positions(7, 0);
+    set_positions(7, 1);
+    put_pheromone(7, 3);
     move(3, 10);
     print_positions('\n');
-    // printf("deed: %d\n", check(7, 5).has_deed);
+    print_itches('\n');
     return 0;
 }
