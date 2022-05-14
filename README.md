@@ -1,5 +1,6 @@
 # ant-maze
-ESE 124 Final Project for Spring 2022.
+ESE 124 Final Project for Spring 2022.  
+This repository is archived as of 12:41 AM, May 14 2022 EDT.
 
 # to anyone that might play around with the code
 The map is stored in the file called `map`.
