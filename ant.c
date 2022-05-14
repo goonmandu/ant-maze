@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "ant.h"
 
 static int top = 0;
 static int stack[STACK_SIZE][2];
+char steps[500][25];
+int num_steps = 0;
 
 static int wall_map[EACH_SIDE][EACH_SIDE];
 static int deed_map[EACH_SIDE][EACH_SIDE];
@@ -13,8 +16,16 @@ Ant michael = {
     .current = {0, 0},  // will not be read whatsoever, only for traversal purposes
     .cached = {0, 0},
     .itch = 0,
-    .score = 0
+    .score = 0,
+    .num_of_deeds = 0,
+    .latest_deed = 0,
+    .max_deed = 0
 };
+
+void record(char *command) {
+    num_steps++;
+    strcpy(steps[num_steps-1], command);
+}
 
 void pop(void) {
     top--;
@@ -81,27 +92,29 @@ void move(int dir, int spaces) {  // General purpose move function
     feel_itch();
 }
 
-void is_open(int dir) {  // 0L 1R 2F 3B
-    int free_spaces = 0;
-    // Checks for number of free spaces in given direction, with a for loop or while loop
-    michael.itch[dir] = free_spaces;
-}
-
 void clear(void) {
     top = 0;
 }
 
-void bold_jump(void) {
-    
+void bold_jump(int dir) {
+    put_pheromone(michael.current[0], michael.current[1]);
+    move(dir, michael.itch[dir]);
+    put_pheromone(michael.current[0], michael.current[1]);
+    record("BoldJump\n");
 }
 
-void cautious_jump(void) {
-
+void cautious_jump(int dir) {
+    put_pheromone(michael.current[0], michael.current[1]);
+    move(dir, 1);
+    put_pheromone(michael.current[0], michael.current[1]);
+    record("CautiousJump\n");
 }
 
+/* CANCELLED
 void backtrack(void) {
 
 }
+*/
 
 /*  CANCELLED
 void repeat(void (*funcptr) (void), int times) {
@@ -213,6 +226,7 @@ void feel_itch() {
         }
         michael.itch[dir] = spaces;
     }
+    record("FeelItch\n");
 }
 
 void print_itches(char end) {
@@ -228,4 +242,14 @@ void print_itches(char end) {
 
 void put_pheromone(int x, int y) {
     pher_map[y][x] = 1;
+}
+
+void move_one(int dir) {
+    put_pheromone(michael.current[0], michael.current[1]);
+    move(dir, 1);
+    put_pheromone(michael.current[0], michael.current[1]);
+}
+
+int michaels_deeds() {
+    return michael.score;
 }

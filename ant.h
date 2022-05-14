@@ -1,5 +1,5 @@
 #define EACH_SIDE 16
-#define MAX_STEPS 20
+#define MAX_STEPS 50
 #define STACK_SIZE 100
 
 typedef struct Ant {
@@ -21,21 +21,24 @@ typedef struct Cell {
 } Cell;
 
 // Debug: void print_ant(void);
+void record(char *);
 void pop(void);
-void push(int x, int y);
+void push(int, int);
 void peek(void);
-void move(int dir, int spaces);
-void is_open(int dir);
+void move(int, int);
 void clear(void);
-void bold_jump(void);
-void cautious_jump(void);
-void backtrack(void);
-void repeat(void (*funcptr) (void), int times);
-// Unused: int *decode_xy(int num, int dim);  
+void bold_jump(int);
+void cautious_jump(int);
 void scan_maze(FILE *file);
-Cell check(int x, int y);  // check(4, 6).has_deed
-void set_positions(int x, int y);
+void set_positions(int, int);
 void print_positions(char);
 void feel_itch(void);
 void print_itches(char);
 void put_pheromone(int, int);
+void move_one(int);
+int michaels_deeds(void);
+void log_steps(void);
+Cell check(int, int);
+// Cancelled: void backtrack(void);
+// Cancelled: void repeat(void (*funcptr) (void), int);
+// Unused: int *decode_xy(int num, int dim);

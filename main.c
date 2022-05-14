@@ -1,27 +1,24 @@
 #include <stdio.h>
 #include "ant.h"
+#include "intelligence.h"
 
 int main() {
-    extern Ant michael;
-    FILE *in;
+    extern char steps[500][25];
+    extern int num_steps;
+    FILE *in, *out;
     if ((in = fopen("map", "r")) == NULL) {
         printf("Cannot open input file.\n");
         return 1;
     }
-    int steps_taken = 0;
+    out = fopen("steps_taken", "w");
     scan_maze(in);
-
-    /* Code to check if data structure works */
-    /*
-    push(4, 7);
-    peek();
-    printf("Coords remembered by peek: (%d, %d)\n", michael.cached[0], michael.cached[1]);
-    printf("%d\n", check(2, 3).has_deed);
-    */
     set_positions(7, 1);
-    put_pheromone(7, 3);
-    move(3, 10);
-    print_positions('\n');
-    print_itches('\n');
+    while (num_steps <= MAX_STEPS) {
+        main_loop();
+    }
+    printf("Michael's Final Score: %d\n", michaels_deeds());
+    for (int i = 0; i < num_steps; i++) {
+        fputs(steps[i], out);
+    }
     return 0;
 }

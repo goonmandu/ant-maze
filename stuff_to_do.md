@@ -1,13 +1,13 @@
 # TODOs
-- [ ] Make movement functions
+- [x] Make movement functions
 
 - [ ] Decision-making intelligence
 
 - [x] Store deed points into Michael
 
-- [ ] Implement iteration for actions
+- [ ] ~~Implement iteration for actions~~
 
-- [ ] Make maze file, and put it in GitHub repo
+- [x] Make maze file, and put it in GitHub repo
 
 - [x] Store number of collected deeds in Michael
 

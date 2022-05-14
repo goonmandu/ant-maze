@@ -1,6 +1,9 @@
 # ant-maze
 ESE 124 Final Project for Spring 2022.
 
+# to anyone that might play around with the code
+If you want to make your own
+
 # compile instructions
 ```zsh
 cd /path-to-dir/  # Linux or macOS

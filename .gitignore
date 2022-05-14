@@ -1,3 +1,4 @@
 *.o
 main
 *.exe
+steps_taken
