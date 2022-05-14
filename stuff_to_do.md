@@ -1,7 +1,7 @@
 # TODOs
 - [x] Make movement functions
 
-- [ ] Decision-making intelligence
+- [x] Decision-making intelligence
 
 - [x] Store deed points into Michael
 
@@ -11,6 +11,6 @@
 
 - [x] Store number of collected deeds in Michael
 
-- [ ] Store sequence of actions taken as IDs (to a separate stack)
+- [x] Store sequence of actions taken as IDs (to a separate stack)
 
-- [ ] Decode action IDs
+- ~~[ ] Decode action IDs~~
