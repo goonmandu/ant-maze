@@ -1,5 +1,5 @@
 #define EACH_SIDE 16
-#define MAX_STEPS 50
+#define MAX_STEPS 400
 #define STACK_SIZE 100
 
 typedef struct Ant {

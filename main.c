@@ -12,7 +12,7 @@ int main() {
     }
     out = fopen("steps_taken", "w");
     scan_maze(in);
-    set_positions(7, 1);
+    set_positions(7, 12);
     while (num_steps <= MAX_STEPS) {
         main_loop();
     }
