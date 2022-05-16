@@ -30,7 +30,8 @@ then,
 ```zsh
 gcc -c ant.c
 gcc -c main.c
-gcc -o main main.c ant.c
+gcc -c intelligence.c
+gcc -o main main.c ant.c intelligence.c
 ```
 finally,
 ```zsh
